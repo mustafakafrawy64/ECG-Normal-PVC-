@@ -3,7 +3,7 @@ import numpy as np
 from collections import Counter
 
 class KNNClassifier:
-    """A small self-contained KNN classifier implemented with NumPy
+    """
 
     - fit(X, y): store training data
     - predict(x): predict label for a single sample
@@ -116,11 +116,4 @@ class KNNClassifier:
         return X, y
 
 
-# Demo for testing only
-# if __name__ == "__main__":
-#     X = [[0,0], [1,1], [0.9,1.1], [10,10]]
-#     y = ['normal', 'pvc', 'pvc', 'normal']
-#
-#     clf = KNNClassifier(k=3)
-#     clf.fit(X, y)
-#     print(clf.predict([0.95, 1.0]))
+

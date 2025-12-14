@@ -195,10 +195,18 @@ class SignalApp:
                 dct_feats
             )
 
+            # Confidence percentage (KNN vote ratio)
+            total_votes = sum(votes.values())
+            confidence = (votes.get(pred_label, 0) / total_votes) * 100 if total_votes > 0 else 0.0
+
             messagebox.showinfo(
                 "Classification Result",
-                f"Predicted: {pred_label}\n\nVotes: {votes}\n\nNeighbors: {neigh_labels}\n\nDistances: {neigh_dists}",
+                f"Predicted Class: {pred_label}\n"
+                f"Accuracy: {confidence:.2f}%\n\n"
+                f"Votes: {votes}\n\n"
+                f"Neighbors: {neigh_labels}",
             )
+
 
         except Exception as e:
             messagebox.showerror("Classification Error", str(e))

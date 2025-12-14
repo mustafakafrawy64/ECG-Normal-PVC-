@@ -4,7 +4,7 @@ from scipy.signal import butter, filtfilt
 class Preprocessing:
     
     def __init__(self):
-        self.sampling_rate = 360  # Hz (MIT_BIH standard)
+        self.sampling_rate = 360  # Hz
 
     def load_data(self, file_path): #load dataset and returns numpy array of the signal.
         
@@ -26,15 +26,15 @@ class Preprocessing:
         except Exception as e:
             raise ValueError(f"Error reading file: {e}")
 
-    def apply_processing(self, raw_signal): # #Applies the Band Pass Filter and Normalization.
-     
+    def apply_processing(self, raw_signal):
+
         # 1. Band Pass Filter (Butterworth)
         b, a = butter(N=2, Wn=[0.5, 40], btype='bandpass', fs=self.sampling_rate)
         
-        # 'filtfilt' is the built-in zero-phase filter (prevents peak shifting)
+        # filter forward then backwards  to cancel shifts "zero-phase"
         filtered_signal = filtfilt(b, a, raw_signal)
 
-        # 2. Normalization (Min-Max)
+        # Min-Max normalization
         min_val = np.min(filtered_signal)
         max_val = np.max(filtered_signal)
         
